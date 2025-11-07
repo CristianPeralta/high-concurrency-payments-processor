@@ -1,19 +1,44 @@
 {
   "name": "high-concurrency-payments-processor",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "High concurrency payments processor with microservices architecture",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:producer": "pnpm --filter @payments/producer-api start",
+    "start:worker": "pnpm --filter @payments/order-processor start",
+    "start:accounting": "pnpm --filter @payments/accounting-data start",
+    "dev:producer": "pnpm --filter @payments/producer-api dev",
+    "dev:worker": "pnpm --filter @payments/order-processor dev",
+    "dev:accounting": "pnpm --filter @payments/accounting-data dev"
   },
-  "keywords": [],
+  "keywords": ["payments", "microservices", "high-concurrency"],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.19.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "services/*"
+  ],
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
     "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3"
   }
 }
